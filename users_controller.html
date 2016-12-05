@@ -1,0 +1,47 @@
+<html ng-app='myApp'>
+<head>
+  <title>Users Controllers</title>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+   <script type='text/javascript'>
+     var myAppModule = angular.module('myApp', []);
+           myAppModule.controller('studentsController', function ($scope){
+      $scope.students = [ 
+       {f_name: 'Song', l_name: 'Atthajaroon', language:'Javascript'}, 
+       {f_name: 'Charles', l_name: 'Mutumbo', language:'Ruby'}, 
+       {f_name: 'Tammy', l_name: 'Wayne', language:'PHP'},
+       {f_name: 'Maddie', l_name:'Fido', language:'Python'},
+       {f_name: 'Rhian', l_name:'Smith', language:'Java'}
+      ];
+      $scope.addStudent = function(){
+       $scope.students.push($scope.newStudent);
+       $scope.newStudent = {};
+      }
+
+      $scope.removeStudent = function($index) {
+        $scope.students.splice($index, 1);
+      }
+     });
+    </script>
+</head>
+<body>
+  <div ng-controller='studentsController'>
+
+      <h3>Add a new Student</h3>
+        <form>
+            First Name: <input type='text' ng-model='newStudent.f_name'>
+            Last Name: <input type='text' ng-model='newStudent.l_name'>
+            Favoroite Language: <input type='text' ng-model='newStudent.language'>
+            <input type='submit' value='Add Student' ng-click='addStudent()'>
+        </form>
+
+      Users Controller: 
+      <ul>
+        <li ng-repeat="student in students">
+          Name: {{ student.f_name + ' ' + student.l_name }} | Fav Language: {{ student.language }} 
+          <a href="#" ng-click='removeStudent($index)'>delete</a>
+        </li>
+      </ul>
+
+    </div>
+</body>
+</html>
